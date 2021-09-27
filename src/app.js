@@ -59,6 +59,23 @@ app.get('/students/:id', async (req, res) => {
   }
 })
 
+// update the students by its id
+app.patch('/students/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const updateStudent = await Student.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+      }
+    )
+    res.send(updateStudent)
+  } catch (e) {
+    res.status(404).send(e)
+  }
+})
+
 app.listen(port, () => {
   console.log(`connection is setup at ${port}`)
 })
