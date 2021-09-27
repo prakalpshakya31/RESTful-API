@@ -76,6 +76,19 @@ app.patch('/students/:id', async (req, res) => {
   }
 })
 
+// delete the student by id
+app.delete('/students/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const deleteStudent = await Student.findByIdAndDelete(
+      id
+    )
+    res.send(deleteStudent)
+  } catch (e) {
+    res.send(e)
+  }
+})
+
 app.listen(port, () => {
   console.log(`connection is setup at ${port}`)
 })
